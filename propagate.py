@@ -71,6 +71,7 @@ def update_tile_array(tile_array_old, naive_state_list, relation_set, last_updat
     # find tiles with least entropy not zero
     minimum_entropy = tile_array[np.where(~vectorized_collapsed(tile_array))].min().get_entropy()
     minimum_entropy_tiles = np.where(vectorized_entropy(tile_array) == minimum_entropy)
+    
 
     # choose one of those tiles at random to collapse
     target_tile = np.random.randint(len(minimum_entropy_tiles[0]))
