@@ -4,6 +4,8 @@
 This file contains the functions needed to update the tile array.
 '''
 
+import visualize as vis
+
 import numpy as np
 import itertools as it
 
@@ -66,7 +68,8 @@ def update_tile_array(tile_array_old, naive_state_list, relation_set, last_updat
             if out_of_bounds(absolute_neighbor, tile_array): continue
             current_tile = tile_array[absolute_neighbor[0],absolute_neighbor[1]]
             if current_tile.collapsed: continue
-            tile_array[absolute_neighbor[0],absolute_neighbor[1]].update(calculate_entropy(tile_array, absolute_neighbor, naive_state_list, relation_set))
+            n_x, n_y = list(absolute_neighbor)
+            tile_array[n_x,n_y].update(calculate_entropy(tile_array, absolute_neighbor, naive_state_list, relation_set))
 
     # find tiles with least entropy not zero
     minimum_entropy = tile_array[np.where(~vectorized_collapsed(tile_array))].min().get_entropy()
@@ -84,6 +87,7 @@ def update_tile_array(tile_array_old, naive_state_list, relation_set, last_updat
 def propagate_tile_array(tile_array, naive_state_list, relation_set, last_update=None):
     while np.count_nonzero(~vectorized_collapsed(tile_array)):
         tile_array, last_update = update_tile_array(tile_array.copy(), naive_state_list, relation_set, last_update=last_update)
+        vis.plot_annotated_entropy(tile_array)
 
     return tile_array
 

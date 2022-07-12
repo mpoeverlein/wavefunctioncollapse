@@ -31,7 +31,6 @@ class Tile():
         self.states = {k: 1 if k == self.result else 0 for k in self.states}
 
     def update(self, states):
-        print(f'UPDATE: {states}')
         self.states = states
 
     def get_state(self):

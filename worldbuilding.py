@@ -42,7 +42,7 @@ tile_array[5,5].collapse(state='beach')
 
 last_update = None
 tile_array, last_update = prop.update_tile_array(tile_array.copy(), naive_state_list, relation_set, last_update=last_update)
-#vis.plot_annotated_entropy(tile_array)
+vis.plot_annotated_entropy(tile_array)
 
 #exit()
 
